@@ -1,0 +1,51 @@
+
+https://github.com/YoujiaZhang/Navicat-Premium-15/releases/download/1.0/navicat15-premium-cs.AppImage
+
+
+系统环境配置
+
+sudo apt-get install libcapstone-dev
+
+sudo apt-get install cmake
+
+cd keystone
+mkdir build
+cd build
+../make-share.sh
+sudo make install
+sudo ldconfig
+
+sudo apt-get install rapidjson-dev
+
+
+1、赋予执行权限
+sudo chmod +x appimagetool-x86_64.AppImage
+sudo chmod +x navicat-patcher
+sudo chmod +x navicat-keygen
+
+
+2、 解压 并进入  Navicat-Premium-15-master.zip
+mkdir navicat15
+mount -o loop navicat15-premium-cs.AppImage navicat15
+cp -r navicat15 navicat15-patched
+
+
+3、运行补丁
+./navicat-patcher navicat15-patched
+生成RegPrivateKey.pem文件
+
+
+4、打包成独立运行软件
+./appimagetool-x86_64.Appimage navicat15-patched navicat15-premium-cs-pathed.AppImage
+
+
+5、运行补丁后软件包
+chmod +x navicat15-premium-cs-pathed.AppImage
+./navicat15-premium-cs-pathed.AppImage
+
+
+
+6、运行注册机
+./navicat-keygen --text ./RegPrivateKey.pem 
+
+# 提示  注意软件包名称是否错误    命令尽量使用 sudo 执行
